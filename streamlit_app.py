@@ -3,8 +3,6 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 
-# --- Model Loading and Custom Objects ---
-
 
 # Define the custom functions required to load the model
 def euclidean_distance(vects):
@@ -40,9 +38,6 @@ def load_siamese_model(model_path):
         return None
 
 
-# --- Image Preprocessing ---
-
-
 def preprocess_image(image_file):
     """
     Takes an uploaded image file, converts it to grayscale, resizes to 28x28,
@@ -66,7 +61,7 @@ def preprocess_image(image_file):
     return img_array
 
 
-# --- Streamlit App UI ---
+# Streamlit App UI
 
 st.set_page_config(layout="wide")
 
@@ -93,7 +88,7 @@ if model:
             "Choose the second image...", type=["jpg", "jpeg", "png"]
         )
 
-    # --- Prediction and Results ---
+    # Prediction and Results
 
     if uploaded_file1 and uploaded_file2:
         # Preprocess both images
@@ -113,9 +108,7 @@ if model:
         prediction = model.predict([image1, image2])
         distance = prediction[0][0]
 
-        # Define a threshold for similarity
-        # This threshold may need tuning based on model performance.
-        # A smaller distance means more similar.
+        # Define a threshold
         SIMILARITY_THRESHOLD = 0.5
 
         # Display the results
